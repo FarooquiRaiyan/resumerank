@@ -2,6 +2,8 @@ import pdfplumber
 import spacy
 from groq import Groq
 import json
+from dotenv import load_dotenv
+load_dotenv()
 
 def extract_text_from_pdf(pdf_path):
     text=""
@@ -10,7 +12,8 @@ def extract_text_from_pdf(pdf_path):
             text +=page.extract_text() + "\n"
     return text.strip()
 
-API_KEY= "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"
+import os
+API_KEY = os.environ.get("GROQ_API_KEY")
 
 def analy_resume_llm(resume_text:str,job_description:str)->dict:
     prompt =f"""
