@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Rank Analyzer</title>
+</head>
+<body>
+    <h2>Resume Rank Checker</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="job_description">Job Description:</label><br>
+        <textarea name="job_description" rows="10" cols="80" required></textarea><br><br>
+
+        <label for="resume">Upload Your Resume (PDF):</label><br>
+        <input type="file" name="resume" accept=".pdf" required><br><br>
+
+        <button type="submit">Check My Resume Rank</button>
+    </form>
+
+    {% if result %}
+        <h3>Resume Analysis Result:</h3>
+        <p><strong>Rank:</strong> {{ result.rank }}</p>
+        <p><strong>Skills:</strong> {{ result.skills }}</p>
+        <p><strong>Total Experience:</strong> {{ result.total_experience }}</p>
+        <p><strong>Project Categories:</strong> {{ result.project_category }}</p>
+    {% endif %}
+
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
