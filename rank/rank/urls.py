@@ -21,7 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/resume/', AnalyzeResumeAPI.as_view()),
     path('api/jobs/', JobDescriptionAPI.as_view()),
-    path("resume-check/", resume_rank_view, name="resume_rank_view"),
-    
+    path("", resume_rank_view, name="resume_rank_view"),
 
 ]

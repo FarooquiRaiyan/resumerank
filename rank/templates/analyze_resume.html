@@ -3,31 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <title>Resume Rank Analyzer</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 750px;
+            background: #fff;
+            margin: 60px auto;
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.8s ease;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #444;
+        }
+
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus,
+        input[type="file"]:focus {
+            border-color: #0078d7;
+            outline: none;
+        }
+
+        button {
+            background-color: #0078d7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #005fa3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .result {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 5px solid #0078d7;
+        }
+
+        .result h3 {
+            color: #0078d7;
+            margin-top: 0;
+        }
+
+        .error {
+            color: red;
+            background: #ffe5e5;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Resume Rank Checker</h2>
+    <div class="container">
+        <h2>Resume Rank Checker</h2>
 
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <label for="job_description">Job Description:</label><br>
-        <textarea name="job_description" rows="10" cols="80" required></textarea><br><br>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="job_description">Job Description:</label>
+            <textarea name="job_description" rows="8" placeholder="Paste the job description here..." required></textarea>
 
-        <label for="resume">Upload Your Resume (PDF):</label><br>
-        <input type="file" name="resume" accept=".pdf" required><br><br>
+            <label for="resume">Upload Your Resume (PDF):</label>
+            <input type="file" name="resume" accept=".pdf" required>
 
-        <button type="submit">Check My Resume Rank</button>
-    </form>
+            <button type="submit">Check My Resume Rank</button>
+        </form>
 
-    {% if result %}
-        <h3>Resume Analysis Result:</h3>
-        <p><strong>Rank:</strong> {{ result.rank }}</p>
-        <p><strong>Skills:</strong> {{ result.skills }}</p>
-        <p><strong>Total Experience:</strong> {{ result.total_experience }}</p>
-        <p><strong>Project Categories:</strong> {{ result.project_category }}</p>
-    {% endif %}
+        {% if result %}
+            <div class="result">
+                <h3>Resume Analysis Result</h3>
+                <p><strong>Rank:</strong> {{ result.rank }}</p>
+                <p><strong>Skills:</strong> {{ result.skills }}</p>
+                <p><strong>Total Experience:</strong> {{ result.total_experience }}</p>
+                <p><strong>Project Categories:</strong> {{ result.project_category }}</p>
+            </div>
+        {% endif %}
 
-    {% if error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+    </div>
 </body>
 </html>

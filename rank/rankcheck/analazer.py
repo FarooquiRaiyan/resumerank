@@ -3,7 +3,9 @@ import spacy
 from groq import Groq
 import json
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv(dotenv_path=r"C:\Users\Raiyan\OneDrive\Desktop\PythonDjnago\resumerankcheck\.env")
+
+
 
 def extract_text_from_pdf(pdf_path):
     text=""
