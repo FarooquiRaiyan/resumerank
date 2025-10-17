@@ -1,9 +1,18 @@
+# Virtual environment
 venv/
+
+# Python cache files
 __pycache__/
 *.pyc
 *.pyo
+
+# Database and logs
 *.sqlite3
 *.log
+
+# Environment and secrets
 .env
+
+# Uploaded or generated files
 media/
-.pdf
+*.pdf
